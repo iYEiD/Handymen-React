@@ -1,15 +1,14 @@
 import { Layout, Breadcrumb } from "antd";
 import { Content, Footer } from "antd/es/layout/layout";
 import { HeaderComponent } from "../components/headerComponent";
-import { ServiceCard } from "../components/serviceCardComponent";
 
-export const BookingPage = () => {
+export const AccountPage = () => {
     return (
         <Layout className="layout">
-            <HeaderComponent selectedKey="1" />
+            <HeaderComponent selectedKey="3" />
             <Content style={{ padding: '0 50px' }}>
                 <div style={{ background: '#fff', padding: 24, marginTop: 10 }}>
-                    <h1>Your Bookings</h1>
+                    <h1>My Profile</h1>
                 </div>
             </Content>
             <Footer style={{ textAlign: 'center' }}>

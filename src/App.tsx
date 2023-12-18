@@ -1,4 +1,5 @@
 import './App.css';
+import { AccountPage } from './pages/profilePage';
 import { BookingPage } from './pages/bookingPage';
 import { ErrorPage } from './pages/errorPage';
 import { LoginPage } from './pages/loginPage';
@@ -14,6 +15,7 @@ function App() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/services" element={<ServicesPage />} />
         <Route path='/mybookings' element={<BookingPage />} />
+        <Route path='/myprofile' element={<AccountPage />} />
         <Route path='*' element={<ErrorPage />} />
       </Routes>
     </Router>
