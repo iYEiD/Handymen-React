@@ -1,4 +1,4 @@
-import { Layout, Breadcrumb, Row } from "antd";
+import { Layout, Breadcrumb, Row, Modal } from "antd";
 import { Content, Footer } from "antd/es/layout/layout";
 import { HeaderComponent } from "../components/headerComponent";
 
@@ -26,20 +26,35 @@ export const BookingPage = () => {
     }, [user]);
 
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [selectedService, setSelectedService] = useState<any>();
+    const [selectedBooking, setSelectedBooking] = useState<any>();
 
     const showModal = () => {
         setIsModalOpen(true);
     };
 
-    const handleBookNow = (service: any) => {
+    const handleCancelBooking = (booking: any) => {
         showModal();
-        setSelectedService(service);
+        setSelectedBooking(booking);
+
     }
 
     const handleOk = () => {
+        if (selectedBooking && user && user.id) {
+            fetch(`http://localhost:3001/booking/${selectedBooking.id}/user/${user.id}`, {
+                method: 'DELETE',
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    const newData = data.filter((booking: any) => booking.id !== selectedBooking.id);
 
-
+                    setData(newData);
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        }
         setIsModalOpen(false);
     };
 
@@ -59,14 +74,16 @@ export const BookingPage = () => {
                     <hr />
 
                     <div style={{ display: 'flex', flexWrap: 'wrap', flexDirection: 'column' }}>
-                        {data.map((booking: any) => <BookingCard bookingId={booking.id} date={booking.date} status={booking.status} onCancelNow={() => handleCancel()} />)
+                        {data.map((booking: any) => <BookingCard bookingId={booking.id} date={booking.date} status={booking.status} onCancelNow={() => handleCancelBooking(booking)} />)
                         }
 
                     </div>
                 </div>
-
             </Content>
+            <Modal title="Book Now" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+                <h3>Are you sure you'd like to cancel this booking?</h3>
 
+            </Modal>
             <Footer style={{ textAlign: 'center' }}>
                 HandyHelp @ 2024 - Web Prog I Project
             </Footer>

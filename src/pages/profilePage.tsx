@@ -58,6 +58,8 @@ export const AccountPage = () => {
             console.log(data);
             if (data) {
                 console.log('Password changed successfully');
+                localStorage.removeItem('user');
+                window.location.href = '/';
             } else {
                 console.log('Failed to change password');
             }
