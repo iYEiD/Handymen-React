@@ -73,7 +73,7 @@ export const LoginPage = () => {
                             placeholder="Password"
                         />
                     </Form.Item>
-                    <Form.Item>
+                    <Form.Item style={{ display: 'flex', justifyContent: 'center', marginBottom: 0 }}>
                         <Button type="primary" htmlType="submit" className="login-form-button" >
                             Sign in
                         </Button>

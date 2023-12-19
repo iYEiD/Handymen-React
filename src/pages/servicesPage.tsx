@@ -51,6 +51,7 @@ export const ServicesPage = () => {
             <Content style={{ padding: '0 50px' }}>
                 <div style={{ background: '#fff', padding: 24, marginTop: 10 }}>
                     <h1>Welcome back {user?.fullName}, Browse our services</h1>
+                    <hr />
                     <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around' }}>
                         {data.map((service: any) => <ServiceCard title={service.name} description={service.description} price={service.price}
                             onBookNow={() => handleBookNow(service)} />)}

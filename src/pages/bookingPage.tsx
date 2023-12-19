@@ -23,7 +23,8 @@ export const BookingPage = () => {
             <HeaderComponent selectedKey="1" />
             <Content style={{ padding: '0 50px' }}>
                 <div style={{ background: '#fff', padding: 24, marginTop: 10 }}>
-                    <h1>Your Bookings {user?.username}</h1>
+                    <h1>Your Bookings</h1>
+                    <hr />
                 </div>
             </Content>
             <Footer style={{ textAlign: 'center' }}>
