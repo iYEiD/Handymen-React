@@ -1,10 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { ServiceCard } from "../components/serviceCardComponent";
-import { Layout, Modal } from "antd";
+import { DatePicker, Layout, Modal } from "antd";
 import { Content, Footer } from "antd/es/layout/layout";
 import { HeaderComponent } from "../components/headerComponent";
 
 export const ServicesPage = () => {
+
+    const [user, setUser] = useState<any>();
+    useEffect(() => {
+        const user = localStorage.getItem('user');
+        if (user) {
+            setUser(JSON.parse(user));
+        }
+    }
+        , []);
+
+    const [selectedDate, setSelectedDate] = useState<any>();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedService, setSelectedService] = useState<any>();
 
@@ -18,6 +29,7 @@ export const ServicesPage = () => {
     }
 
     const handleOk = () => {
+        console.log(selectedDate);
         setIsModalOpen(false);
     };
 
@@ -38,15 +50,18 @@ export const ServicesPage = () => {
             <HeaderComponent selectedKey="2" />
             <Content style={{ padding: '0 50px' }}>
                 <div style={{ background: '#fff', padding: 24, marginTop: 10 }}>
-                    <h1>Our Services</h1>
+                    <h1>Welcome back {user?.fullName}, Browse our services</h1>
                     <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around' }}>
                         {data.map((service: any) => <ServiceCard title={service.name} description={service.description} price={service.price}
                             onBookNow={() => handleBookNow(service)} />)}
                     </div>
                 </div>
-                <Modal title="Basic Modal" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
-
-
+                <Modal title={`Book ${selectedService?.name} Service`} open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+                    <p>Order By: {user?.fullName}</p>
+                    <p>Service: {selectedService?.name}</p>
+                    <p>Please Select your desired booking date</p>
+                    <DatePicker onChange={(date, dateString) => setSelectedDate(dateString)} />
+                    <h3>Total: {selectedService?.price}$</h3>
                 </Modal>
             </Content>
             <Footer style={{ textAlign: 'center' }}>

@@ -1,8 +1,21 @@
 import { Layout, Breadcrumb } from "antd";
 import { Content, Footer } from "antd/es/layout/layout";
 import { HeaderComponent } from "../components/headerComponent";
+import { useEffect, useState } from "react";
 
 export const AccountPage = () => {
+
+    const [user, setUser] = useState<any>();
+    useEffect(() => {
+        const user = localStorage.getItem('user');
+        if (user) {
+            setUser(JSON.parse(user));
+        }
+    }
+        , []);
+
+
+
     return (
         <Layout className="layout">
             <HeaderComponent selectedKey="3" />
