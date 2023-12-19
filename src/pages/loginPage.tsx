@@ -21,13 +21,16 @@ export const LoginPage = () => {
 
             if (res.status === 201) {
                 const data = res.json().then((data) => {
-
                     console.log(data);
                     localStorage.setItem('user', JSON.stringify(data));
                     window.location.href = '/services';
                 }
                 );
 
+            }
+            else if (res.status === 401) {
+                console.log('Invalid username or password');
+                alert('Invalid username or password');
             }
         })
             .catch((error) => {
