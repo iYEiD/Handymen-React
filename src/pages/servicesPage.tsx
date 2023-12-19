@@ -29,7 +29,23 @@ export const ServicesPage = () => {
     }
 
     const handleOk = () => {
-        console.log(selectedDate);
+        fetch('http://localhost:3001/booking', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                serviceId: selectedService?.id,
+                userId: user?.id,
+                date: selectedDate,
+                status: "pending"
+            })
+        }).then(response => response.json())
+            .then(data => {
+                console.log(data);
+                setIsModalOpen(false);
+            });
+
         setIsModalOpen(false);
     };
 
