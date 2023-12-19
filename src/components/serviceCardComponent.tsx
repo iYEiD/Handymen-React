@@ -1,10 +1,11 @@
-import { Button, Card, Modal } from 'antd';
+import { Button, Card } from 'antd';
 import ReactDOM from 'react-dom';
 
 interface ServiceCardProps {
     title?: number;
     description?: string;
     price?: number;
+    onBookNow?: () => void;
 }
 
 export const ServiceCard = (props: ServiceCardProps) => {
@@ -18,10 +19,7 @@ export const ServiceCard = (props: ServiceCardProps) => {
                 {props.title}
                 <p>{props.description}</p>
                 <div>
-                    <Button type="primary" >Book Now</Button>
-                    <Modal title="Title">
-                        <p>hi</p>
-                    </Modal>
+                    <Button type="primary" onClick={props.onBookNow}>Book Now</Button>
                 </div>
                 <p>{props.price} $</p>
             </div>

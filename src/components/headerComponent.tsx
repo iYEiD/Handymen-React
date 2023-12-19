@@ -6,6 +6,10 @@ interface HeaderComponentProps {
     selectedKey: string;
 }
 
+const handleLogout = () => {
+    localStorage.removeItem('user');
+    window.location.href = '/';
+}
 
 export const HeaderComponent = ({ selectedKey }: HeaderComponentProps) => {
     return (<Header>
@@ -22,6 +26,9 @@ export const HeaderComponent = ({ selectedKey }: HeaderComponentProps) => {
                 <Link to='/services'></Link></Menu.Item>
             <Menu.Item key="3">My Profile
                 <Link to='/myprofile'></Link></Menu.Item>
+            <Menu.Item key="4" onClick={handleLogout}>Logout
+            </Menu.Item>
+
         </Menu>
     </Header>
     );

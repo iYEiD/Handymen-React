@@ -1,8 +1,11 @@
 import { Form, Input, Button, Checkbox, Card } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
 
 export const LoginPage = () => {
+
+
     const onFinish = (values: any) => {
         console.log('Received values of form: ', values);
         fetch('http://localhost:3001/user/login', {
@@ -15,9 +18,16 @@ export const LoginPage = () => {
                 password: values.password
             })
         }).then((res) => {
-            console.log(res);
+
             if (res.status === 201) {
-                window.location.href = '/services';
+                const data = res.json().then((data) => {
+
+                    console.log(data);
+                    localStorage.setItem('user', JSON.stringify(data));
+                    window.location.href = '/services';
+                }
+                );
+
             }
         })
             .catch((error) => {
